@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -33,7 +34,11 @@ namespace Minecraft
         Texture2D[] textury_louka;
         Texture2D[] textury_doly;
 
-        List<Biome> svet;
+        Dictionary<Point, Biome> svet;
+        Random nahoda = new Random();
+
+        int sirka_sveta = 1 * Biome.VELIKOST;   // 320 px
+        int vyska_sveta = 1 * Biome.VELIKOST;   // 320 px
 
         public Game1()
         {
@@ -49,7 +54,7 @@ namespace Minecraft
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.ApplyChanges();
 
-            pozice_hrace = new Vector2(_graphics.PreferredBackBufferWidth / 2  - velikost_hrace.Y / 2, _graphics.PreferredBackBufferHeight / 2 - velikost_hrace.X / 2);
+            pozice_hrace = new Vector2(135, 135);
 
             base.Initialize();
         }
@@ -81,13 +86,33 @@ namespace Minecraft
             textury_vsech_biomu[(int)Katalog.TypBiomu.Doly][(int)Katalog.Doly.Diamanty] = Content.Load<Texture2D>("diamanty");
 
 
-            svet = new List<Biome>() { new Biome(textury_vsech_biomu, (int)Katalog.TypBiomu.Louka) };
+            svet = new Dictionary<Point, Biome>();
 
-            
 
             // TODO: use this.Content to load your game content here
         }
+        void GenerujOkoli()
+        {
+            Vector2 stred_hrace = pozice_hrace + velikost_hrace / 2;
 
+            // v jakém biomu Steve stojí (Floor kvůli záporným souřadnicím)
+            int bx = (int)Math.Floor(stred_hrace.X / Biome.VELIKOST);
+            int by = (int)Math.Floor(stred_hrace.Y / Biome.VELIKOST);
+
+            for (int dy = -2; dy <= 2; dy++)
+                for (int dx = -3; dx <= 3; dx++)
+                {
+                    Point klic = new Point(bx + dx, by + dy);
+
+                    if (!svet.ContainsKey(klic))
+                    {
+                        Katalog.TypBiomu typ = (Katalog.TypBiomu)nahoda.Next(2);   // 0 = Louka, 1 = Doly
+                        Vector2 pozice = new Vector2(klic.X * Biome.VELIKOST, klic.Y * Biome.VELIKOST);
+
+                        svet.Add(klic, new Biome(textury_vsech_biomu, typ, pozice));
+                    }
+                }
+        }
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -100,11 +125,11 @@ namespace Minecraft
             if (Keyboard.GetState().IsKeyDown(Keys.W)) smer.Y -= 1;
             if (Keyboard.GetState().IsKeyDown(Keys.S)) smer.Y += 1;
             if (Keyboard.GetState().IsKeyDown(Keys.D)) smer.X += 1;
-            if (Keyboard.GetState().IsKeyDown(Keys.A)) smer.Y -= 1;
+            if (Keyboard.GetState().IsKeyDown(Keys.A)) smer.X -= 1;
 
+            pozice_hrace += smer * 3;
 
-
-
+            GenerujOkoli();
 
             base.Update(gameTime);
         }
@@ -113,17 +138,29 @@ namespace Minecraft
         {
             GraphicsDevice.Clear(Color.Green);
 
-            // TODO: Add your drawing code here
+            Vector2 stred_obrazovky = new Vector2(
+                _graphics.PreferredBackBufferWidth / 2f,
+                _graphics.PreferredBackBufferHeight / 2f);
+
+            // kamera = střed Steva ve světě minus střed obrazovky
+            Vector2 kamera = pozice_hrace + velikost_hrace / 2 - stred_obrazovky;
+
+            // Steve se vždy kreslí na střed obrazovky
+            Rectangle steve = new Rectangle(
+                (int)(stred_obrazovky.X - velikost_hrace.X / 2),
+                (int)(stred_obrazovky.Y - velikost_hrace.Y / 2),
+                (int)velikost_hrace.X,
+                (int)velikost_hrace.Y);
 
             _spriteBatch.Begin();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.S)) _spriteBatch.Draw(textura_steve_dolu, pozice_hrace, Color.White);
-            else if (Keyboard.GetState().IsKeyDown(Keys.A)) _spriteBatch.Draw(textura_steve_vlevo, pozice_hrace, Color.White);
-            else if (Keyboard.GetState().IsKeyDown(Keys.D)) _spriteBatch.Draw(textura_steve_vpravo, pozice_hrace, Color.White);
-            else _spriteBatch.Draw(textura_steve_nahoru, pozice_hrace, Color.White);
+            foreach (Biome biom in svet.Values)
+                biom.Vykreslit(_spriteBatch, kamera);
 
-            foreach (Biome biom in svet)
-                biom.Vykreslit(_spriteBatch);
+            if (Keyboard.GetState().IsKeyDown(Keys.S)) _spriteBatch.Draw(textura_steve_dolu, steve, Color.White);
+            else if (Keyboard.GetState().IsKeyDown(Keys.A)) _spriteBatch.Draw(textura_steve_vlevo, steve, Color.White);
+            else if (Keyboard.GetState().IsKeyDown(Keys.D)) _spriteBatch.Draw(textura_steve_vpravo, steve, Color.White);
+            else _spriteBatch.Draw(textura_steve_nahoru, steve, Color.White);
 
             _spriteBatch.End();
 
