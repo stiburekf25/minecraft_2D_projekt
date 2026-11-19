@@ -11,10 +11,11 @@ namespace Minecraft
 
     public static class Katalog
     {
-        public enum TypBiomu { Louka, Doly }
+        public enum TypBiomu { Louka, Doly, Snezny }
 
         public enum Louka { Trava, Drevo, Pole }
         public enum Doly { Kamen, Zlato, Diamanty }
+        public enum Snezny { Snih, Led, Dyne }
     }
     public class Game1 : Game
     {
@@ -69,10 +70,12 @@ namespace Minecraft
             textura_steve_vpravo = Content.Load<Texture2D>("steve_vpravo");
 
             // load textur specifického biomu
-            textury_vsech_biomu = new Texture2D[2][];
+            textury_vsech_biomu = new Texture2D[3][];
             
             textury_vsech_biomu[0] = new Texture2D[3];
             textury_vsech_biomu[1] = new Texture2D[3];
+            textury_vsech_biomu[1] = new Texture2D[3];
+
 
 
             // Louka biome
@@ -84,6 +87,11 @@ namespace Minecraft
             textury_vsech_biomu[(int)Katalog.TypBiomu.Doly][(int)Katalog.Doly.Kamen] = Content.Load<Texture2D>("kamen");
             textury_vsech_biomu[(int)Katalog.TypBiomu.Doly][(int)Katalog.Doly.Zlato] = Content.Load<Texture2D>("zlato");
             textury_vsech_biomu[(int)Katalog.TypBiomu.Doly][(int)Katalog.Doly.Diamanty] = Content.Load<Texture2D>("diamanty");
+
+            textury_vsech_biomu[(int)Katalog.TypBiomu.Snezny][(int)Katalog.Snezny.Led] = Content.Load<Texture2D>("led");
+            textury_vsech_biomu[(int)Katalog.TypBiomu.Snezny][(int)Katalog.Snezny.Dyne] = Content.Load<Texture2D>("dyne");
+            textury_vsech_biomu[(int)Katalog.TypBiomu.Snezny][(int)Katalog.Snezny.Snih] = Content.Load<Texture2D>("snih");
+
 
 
             svet = new Dictionary<Point, Biome>();

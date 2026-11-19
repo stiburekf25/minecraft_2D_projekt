@@ -16,6 +16,7 @@ namespace Minecraft
         static readonly int[][] vahy = new int[][]
         {
         new int[] { 85, 10, 5 },   // Louka: 70 % tráva, 20 % dřevo, 10 % pole
+        new int[] { 85, 10, 5 },     // Doly:  80 % kámen, 15 % zlato, 5 % diamanty
         new int[] { 85, 10, 5 }     // Doly:  80 % kámen, 15 % zlato, 5 % diamanty
         };
 

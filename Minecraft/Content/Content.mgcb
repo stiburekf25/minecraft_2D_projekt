@@ -39,6 +39,19 @@
 /processorParam:Version=3.8.5.1
 /build:drevo.png
 
+#begin dyne.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:dyne.png
+
 #begin kamen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -51,6 +64,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:kamen.png
+
+#begin led.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:led.png
 
 #begin pole.png
 /importer:TextureImporter
@@ -65,7 +91,7 @@
 /processorParam:Version=3.8.5.1
 /build:pole.png
 
-#begin steve_dolu.png
+#begin snih.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -76,7 +102,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
-/build:steve_dolu.png
+/build:snih.png
 
 #begin steve_dolu.png
 /importer:TextureImporter
@@ -104,19 +130,6 @@
 /processorParam:Version=3.8.5.1
 /build:steve_nahoru.png
 
-#begin steve_nahoru.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:steve_nahoru.png
-
 #begin steve_vlevo.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -129,32 +142,6 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:steve_vlevo.png
-
-#begin steve_vlevo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:steve_vlevo.png
-
-#begin steve_vpravo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:steve_vpravo.png
 
 #begin steve_vpravo.png
 /importer:TextureImporter
